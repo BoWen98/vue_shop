@@ -34,7 +34,7 @@
               <span>{{item.authName}}</span>
             </template>
 
-            <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id">
+            <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)">
               <!--一级菜单模板-->
               <template slot="title">
                 <!--图标-->
@@ -97,6 +97,11 @@
       // 点击按钮，切换菜单的折叠与展开
       toggleCollapse() {
         this.isCollapse = !this.isCollapse
+      },
+      // 保存链接的激活状态
+      saveNavState(activePath) {
+        window.sessionStorage.setItem('activePath', activePath)
+        this.activePath = activePath
       }
     }
   }
